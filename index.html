@@ -10,6 +10,11 @@
     <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-bundle.min.js"></script>
 </head>
 <body>
+    <div>
+        <button onclick="filterBy('week')">Week</button>
+        <button onclick="filterBy('month')">Month</button>
+        <button onclick="filterBy('quarter')">Quarter</button>
+    </div>
     <div id="container" style="width: 100%; height: 600px;"></div>
 
     <script>
@@ -19,7 +24,6 @@
                 ['Task 1', '2024-08-01', '2024-08-10', 'Planning'],
                 ['Task 2', '2024-08-11', '2024-08-20', 'Development'],
                 ['Task 3', '2024-08-21', '2024-09-01', 'Testing'],
-                // Add more tasks as needed
             ]);
 
             // Map the data
@@ -36,10 +40,6 @@
             // Set the data for the chart
             chart.data(mapping);
 
-            // Configure the timeline scale
-            chart.getTimeline().scale().maximumGap('5%');
-            chart.getTimeline().scale().minimumGap('1%');
-
             // Enable swimlanes
             chart.getTimeline().rowEvenFill('#f0f0f0');
             chart.getTimeline().rowOddFill('#ffffff');
@@ -47,7 +47,27 @@
             // Render the chart
             chart.container('container');
             chart.draw();
+
+            // Filter function
+            window.filterBy = function(view) {
+                var scale = chart.getTimeline().scale();
+                if (view === 'week') {
+                    scale.minimumGap('1%');
+                    scale.maximumGap('5%');
+                    scale.zoomLevel('week');
+                } else if (view === 'month') {
+                    scale.minimumGap('5%');
+                    scale.maximumGap('10%');
+                    scale.zoomLevel('month');
+                } else if (view === 'quarter') {
+                    scale.minimumGap('10%');
+                    scale.maximumGap('20%');
+                    scale.zoomLevel('quarter');
+                }
+                chart.draw();
+            };
         });
     </script>
 </body>
+
 </html>
