@@ -1,4 +1,4 @@
-# flightplan# Flight Plan Gantt Chart
+# Flight Plan Gantt Chart
 
 This repository hosts a static site on GitHub Pages that provides a project "flight plan" Gantt chart. The chart allows users to create and visualize project timelines with the ability to filter views by weeks, months, and quarters. It also supports multiple swim lanes for the work breakdown structure (WBS).
 
